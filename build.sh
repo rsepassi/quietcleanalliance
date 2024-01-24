@@ -48,5 +48,6 @@ mkdir -p $outdir/icon
 cp icon/* $outdir/icon/
 cp browserconfig.xml $outdir/
 cp favicon.ico $outdir/
+cp simple-grid.min.css $outdir/
 
 echo ok
