@@ -18,29 +18,90 @@
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com"> 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-		<link href="https://fonts.googleapis.com/css2?family=Playfair:opsz,wght@5..1200,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair:opsz,wght@5..1200,300&display=swap" rel="stylesheet">
 
     <!-- css -->
-		<style>
-			/* font */
-			body {
-				font-family: 'Playfair', serif;
-				font-size: 150%;
-        max-width: 1080px; 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+      body {
+        font-family: 'Playfair', serif;
+        font-size: 150%;
+        max-width: 800px;
         margin: 0 auto !important; 
-			}
+        padding: 0px 10px;
+      }
 
-			/* 2 column layout */
-			.column {
-				float: left;
-				width: 50%;
-			}
-			.row:after {
-				content: "";
-				display: table;
-				clear: both;
-			}
-		</style>
+      .column {
+        float: left;
+        width: 50%;
+      }
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+
+
+      nav {
+        display: table;
+        font-size: 90%;
+        width: 100%;
+        height: 2em;
+        background-color: #9EBD6E;
+      }
+
+      nav ul {
+        padding-inline-start: 0px;
+        display: table-cell;
+        vertical-align: middle;
+        list-style-type: none;
+        text-align: center;
+      }
+
+      nav ul li {
+        display: inline-block;
+      }
+
+      nav ul li a {
+        display: inline-block;
+        width: 70%;
+        text-decoration: none;
+        color: white;
+        padding: 1em 1em;
+      }
+
+      nav ul li a:hover {
+        background-color: #D9D0DE;
+      }
+
+      #newsletter {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .newsletter-btn {
+        background-color: #ffffff;
+        color: grey;
+        padding: 1em 1em;
+        border: 2px solid #c2cad0;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 70%;
+        transition: background-color 0.3s ease;
+      }
+
+      .newsletter-btn:hover {
+        background-color: #59D2FE;
+
+      }
+
+      .clear {
+        clear: both;
+      }
+    </style>
   </head>
   <body>
 
@@ -56,7 +117,7 @@
     <hr>
 
     <!-- menu -->
-    <div>
+    <nav>
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/about.html">About</a></li>
@@ -65,14 +126,15 @@
         <li><a href="/allies.html">Allies</a></li>
         <li><a href="/contact.html">Contact</a></li>
       </ul>
-    </div>
+    </nav>
+    <div class="clear"></div>
 
     <!-- newsletter button -->
-    <div>
+    <div id="newsletter">
       <a href="/newsletter.html">
-				<button>
-					Subscribe to our newsletter
-				</button>
-			</a>
+        <button class="newsletter-btn">
+          Subscribe to our newsletter
+        </button>
+      </a>
     </div>
 
