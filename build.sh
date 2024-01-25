@@ -4,7 +4,7 @@ set -e
 
 rootdir=$PWD
 srcdir=$rootdir/site
-outdir=$rootdir/public
+outdir=$rootdir/_site
 
 # Setup output directories
 rm -rf $outdir
