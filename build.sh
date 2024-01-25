@@ -6,14 +6,16 @@ rootdir=$PWD
 srcdir=$rootdir/site
 outdir=$rootdir/public
 
+# Setup output directories
 rm -rf $outdir
-mkdir -p $outdir
+mkdir -p $outdir $outdir/bios $outdir/icon
 
+# Simple templating
+# _header.html + page + _footer.html
 template() {
   src=$1
   dst=$outdir/$src
 
-	mkdir -p $(dirname $dst)
   echo > $dst
   cat _header.html >> $dst
   cat $src >> $dst
@@ -22,6 +24,7 @@ template() {
 
 cd $srcdir
 
+# Template each of these files
 files="
 index.html
 about.html
@@ -36,18 +39,17 @@ bios/james.html
 bios/lucy.html
 bios/patti.html
 "
-
 for f in $files
 do 
   echo $f
   template $f
 done
 
-# Icons
-mkdir -p $outdir/icon
+# Copy in other files
 cp icon/* $outdir/icon/
 cp browserconfig.xml $outdir/
 cp favicon.ico $outdir/
-cp simple-grid.min.css $outdir/
+cp simple-grid.css $outdir/
 
+# All done
 echo ok
