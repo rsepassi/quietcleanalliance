@@ -1,3 +1,3 @@
 #!/bin/sh
-cd _site
+cd built
 python3 -m http.server

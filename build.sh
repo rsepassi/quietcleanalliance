@@ -2,9 +2,12 @@
 
 set -e
 
+# A shell script that builds the site
+# Requires rm, mkdir, cat, cp
+
 rootdir=$PWD
 srcdir=$rootdir/site
-outdir=$rootdir/_site
+outdir=$rootdir/built
 
 # Setup output directories
 rm -rf $outdir

@@ -1,11 +1,11 @@
 The Quiet Clean Alliance Website
 -------------------------------------------------------------------------------
 
-All site files are in site/.
+All site files are in the "site" directory.
 To build the site, run:
   ./build.sh
-The built site will be in _site/.
-You can upload _site/ to the site host (e.g. Netlify).
+The built site will be in the "built" directory.
+You can upload the "built" directory to the site host (e.g. Netlify).
 
 To view it locally, run:
   ./serve.sh
