@@ -5,5 +5,24 @@
 	<p>&copy 2024 Quiet Clean Alliance</p>
 </div>
 
+<!-- close the "content" div -->
+</div>
+
+
+<!-- our sticky navbar -->
+<script>
+  var navbar = document.getElementById("navbar");
+  var sticky = navbar.offsetTop;
+  function stickyNav() {
+    if (window.pageYOffset >= sticky) {
+      navbar.classList.add("sticky")
+      navbar.style.width = "" + Math.min(document.body.scrollWidth, 800) + "px";
+    } else {
+      navbar.classList.remove("sticky");
+    }
+  }
+  window.onscroll = function() {stickyNav()};
+</script>
+
 </body>
 </html>

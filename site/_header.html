@@ -27,7 +27,10 @@
 
     <style>
       body {
-        /* keep the page narrow */
+        /* keep the page narrow
+           note that if this changes, also change the number in the navbar
+           javascript code in _footer.html
+         */
         max-width: 800px;
         /* center the content in the page */
         margin: 0 auto;
@@ -94,8 +97,19 @@
         /* lilac on hover */
         background-color: #D9D0DE;
       }
+
+      /* to enable our sticky navbar. note that there is some associated
+         javascript in _footer.html */
+      .sticky {
+        position: fixed;
+        top: 0;
+        z-index:99;
+      }
+      .sticky + .content {
+        padding-top: 50px;
+      }
     </style>
-    <nav>
+    <nav id="navbar">
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/about.html">About</a></li>
@@ -105,6 +119,7 @@
         <li><a href="/contact.html">Contact</a></li>
       </ul>
     </nav>
+    <div class="content">
 
     <!-- newsletter button -->
     <style>
