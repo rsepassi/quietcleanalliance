@@ -91,8 +91,8 @@ process. Sorry.)
 
 Open Windows PowerShell. Run "wsl".
 
-The commands ./built.sh and ./serve.sh should be run within the "Terminal"
-app when in the quietcleanalliance directory.
+The commands ./built.sh and ./serve.sh should be run within in the
+quietcleanalliance directory.
 
 -------------------------------------------------------------------------------
 
