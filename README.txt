@@ -76,6 +76,25 @@ For CSS documentation: https://developer.mozilla.org/en-US/docs/Web/CSS
 
 -------------------------------------------------------------------------------
 
+Mac instructions
+---
+
+The commands ./built.sh and ./serve.sh should be run within the "Terminal"
+app when in the quietcleanalliance directory.
+
+Windows instructions
+---
+
+Enable Windows Subsystem for Linux. (This is a complicated and annoying
+process. Sorry.)
+
+Open Windows PowerShell. Run "wsl".
+
+The commands ./built.sh and ./serve.sh should be run within the "Terminal"
+app when in the quietcleanalliance directory.
+
+-------------------------------------------------------------------------------
+
 Questions
 
 Does every website need a build.sh step?
