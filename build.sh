@@ -5,13 +5,11 @@ set -e
 # A shell script that builds the site
 # Requires rm, mkdir, cat, cp
 
+cmd=${1:-build}
+
 rootdir=$PWD
 srcdir=$rootdir/site
 outdir=$rootdir/built
-
-# Setup output directories
-rm -rf $outdir
-mkdir -p $outdir $outdir/bios $outdir/icon
 
 # Simple templating
 # _header.html + page + _footer.html
@@ -25,34 +23,56 @@ template() {
   cat _footer.html >> $dst
 }
 
-cd $srcdir
-
 # Template each of these files
 files="
 index.html
-about.html
+who-we-are.html
 resources.html
 news.html
-allies.html
+supporters.html
 contact.html
 newsletter.html
-bios/jeff.html
-bios/chuck.html
-bios/james.html
-bios/lucy.html
-bios/patti.html
+advisors.html
 "
-for f in $files
-do 
-  echo $f
-  template $f
-done
 
-# Copy in other files
-cp icon/* $outdir/icon/
-cp browserconfig.xml $outdir/
-cp favicon.ico $outdir/
-cp simple-grid.css $outdir/
+dobuild() {
+  # Setup output directories
+  rm -rf $outdir
+  mkdir -p $outdir $outdir/bios $outdir/icon
+  cd $srcdir
 
-# All done
-echo ok
+  for f in $files
+  do 
+    echo $f
+    template $f
+  done
+
+  # Copy in other files
+  cp icon/* $outdir/icon/
+  cp browserconfig.xml $outdir/
+  cp favicon.ico $outdir/
+  cp simple-grid.css $outdir/
+  cp normalize.min.css $outdir/
+  cp -r assets $outdir/
+
+  # All done
+  echo ok
+}
+
+watchfiles() {
+  echo build.sh
+  find site -type f | grep -v swp
+}
+
+case $cmd in
+  build)
+    dobuild
+    ;;
+  loop)
+    watchfiles | entr ./build.sh
+    ;;
+  *)
+    echo "unrecognized cmd $cmd"
+    exit 1
+    ;;
+esac
