@@ -25,20 +25,20 @@ template() {
 
 # Template each of these files
 files="
-index.html
-who-we-are.html
-resources.html
-news.html
-supporters.html
-contact.html
-newsletter.html
 advisors.html
+contact.html
+index.html
+news.html
+newsletter.html
+resources.html
+supporters.html
+who-we-are.html
 "
 
 dobuild() {
   # Setup output directories
   rm -rf $outdir
-  mkdir -p $outdir $outdir/bios $outdir/icon
+  mkdir -p $outdir
   cd $srcdir
 
   for f in $files
@@ -48,11 +48,8 @@ dobuild() {
   done
 
   # Copy in other files
-  cp icon/* $outdir/icon/
   cp browserconfig.xml $outdir/
   cp favicon.ico $outdir/
-  cp simple-grid.css $outdir/
-  cp normalize.min.css $outdir/
   cp -r assets $outdir/
 
   # All done
