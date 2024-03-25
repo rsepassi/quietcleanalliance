@@ -8,6 +8,7 @@ if (auth == null) {
   IO.exit(1)
 }
 
+IO.run(["rm -rf built"])
 IO.run(["./do/build.wren"])
 
 IO.run("rm -f built.zip")
