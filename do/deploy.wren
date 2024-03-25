@@ -8,8 +8,8 @@ if (auth == null) {
   IO.exit(1)
 }
 
-IO.run(["rm -rf built"])
-IO.run(["./do/build.wren"])
+IO.run("rm -rf built")
+IO.run(["wrensh", "./do/build.wren"])
 
 IO.run("rm -f built.zip")
 IO.run("bsdtar -c --format zip -f built.zip built")
