@@ -37,7 +37,6 @@ var files = [
   "contact.html",
   "index.html",
   "news.html",
-  "newsletter.html",
   "resources.html",
   "supporters.html",
   "who-we-are.html",
