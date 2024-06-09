@@ -45,11 +45,12 @@
 <!-- our sticky navbar -->
 <script>
   var navbar = document.getElementById("navbar");
+  var banner = document.getElementById("banner-image");
   var sticky = navbar.offsetTop;
   function stickyNav() {
     if (window.pageYOffset >= sticky) {
       navbar.classList.add("sticky")
-      navbar.style.width = "" + Math.min(document.body.scrollWidth, 800) + "px";
+      navbar.style.width = "" + Math.min(banner.width, 800) + "px";
     } else {
       navbar.classList.remove("sticky");
     }
