@@ -7,7 +7,7 @@ var url = "https://api.netlify.com/api/v1/sites/quietcleanalliance.netlify.app/d
 
 if (auth == null) {
   System.print("error: must set AUTH=")
-  IO.exit(1)
+  Process.exit(1)
 }
 
 Process.spawn("rm -rf built".split(" "))
@@ -22,7 +22,7 @@ Process.spawn([
   "-H", "Authorization: Bearer %(auth)",
   "--data-binary", "@built.zip",
   url
-])
+], null, [null, 1, 2])
 
 Process.spawn("rm -f built.zip".split(" "))
 
