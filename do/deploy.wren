@@ -1,6 +1,8 @@
-#!/usr/bin/env wrensh
+#!/usr/bin/env wren
 
-var auth = IO.env("AUTH")
+import "os" for Process
+
+var auth = Process.env("AUTH")
 var url = "https://api.netlify.com/api/v1/sites/quietcleanalliance.netlify.app/deploys"
 
 if (auth == null) {
@@ -8,20 +10,20 @@ if (auth == null) {
   IO.exit(1)
 }
 
-IO.run("rm -rf built")
-IO.run(["wrensh", "./do/build.wren"])
+Process.spawn("rm -rf built".split(" "))
+Process.spawn(["wren", "./do/build.wren"])
 
-IO.run("rm -f built.zip")
-IO.run("bsdtar -c --format zip -f built.zip built")
+Process.spawn("rm -f built.zip".split(" "))
+Process.spawn("bsdtar -c --format zip -f built.zip built".split(" "))
 
-System.print(IO.run([
+Process.spawn([
   "curl",
   "-H", "Content-Type: application/zip",
   "-H", "Authorization: Bearer %(auth)",
   "--data-binary", "@built.zip",
   url
-]))
+])
 
-IO.run("rm -f built.zip")
+Process.spawn("rm -f built.zip".split(" "))
 
 System.print("ok")

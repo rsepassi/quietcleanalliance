@@ -1,8 +1,12 @@
-#!/usr/bin/env wrensh
+#!/usr/bin/env wren
+
+import "os" for Process
+import "io" for File, Directory
+import "scheduler" for Executor
 
 // A script that builds the site
 
-var rootdir = IO.cwd()
+var rootdir = Process.cwd
 var srcdir = "%(rootdir)/site"
 var outdir = "%(rootdir)/built"
 
@@ -11,12 +15,12 @@ var outdir = "%(rootdir)/built"
 class Templater {
   construct new(outdir) {
     _outdir = outdir
-    _header = IO.run(["cat", "site/_header.html"])
-    _footer = IO.run(["cat", "site/_footer.html"])
+    _header = File.read("site/_header.html")
+    _footer = File.read("site/_footer.html")
   }
 
   template(srcf) {
-    var src = IO.run(["cat", srcf])
+    var src = File.read(srcf)
 
     var page = "
     %(_header)
@@ -25,9 +29,7 @@ class Templater {
     "
 
     var dstf = "%(_outdir)/%(srcf)"
-    IO.run(["rm", "-f", dstf])
-    IO.run(["touch", dstf])
-    IO.Process(["echo", page]).stdout(dstf).run()
+    File.write(dstf, page)
   }
 }
 
@@ -45,8 +47,8 @@ var files = [
 var build = Fn.new {
   var t = Templater.new(outdir)
   // Setup output directories
-  IO.run("mkdir -p %(outdir)")
-  IO.chdir(srcdir)
+  Directory.mkdirs(outdir)
+  Process.chdir(srcdir)
 
   for (f in files) {
     System.print(f)
@@ -54,29 +56,27 @@ var build = Fn.new {
   }
 
   // Copy in other files
-  IO.run("rm -rf %(outdir)/browserconfig.xml %(outdir)/favicon.ico %(outdir)/assets")
-  IO.run("cp browserconfig.xml %(outdir)")
-  IO.run("cp favicon.ico %(outdir)")
-  IO.run("cp -r assets %(outdir)")
+  Process.spawn("rm -rf %(outdir)/browserconfig.xml %(outdir)/favicon.ico %(outdir)/assets".split(" "))
+  Process.spawn("cp browserconfig.xml %(outdir)".split(" "))
+  Process.spawn("cp favicon.ico %(outdir)".split(" "))
+  Process.spawn("cp -r assets %(outdir)".split(" "))
 
   // All done
   System.print("ok")
 }
 
-var main = Fn.new {
-  var args = IO.args()
-  var cmd = args.count > 2 ? args[2] : "build"
-  if (cmd == "loop") {
-    X.async(Fn.new {
-      IO.run("./do/serve.wren")
-    })
-    IO.Process(["notify", "-c", "wrensh do/build.wren", "site"]).stdout(1).run()
-  } else if (cmd == "build") {
-    build.call()
-  } else {
-    System.print("unrecognized command %(cmd)")
-    IO.exit(1)
-  }
+var main = Fn.new { |args|
+    if (args.count > 0 && args[0] == "loop") {
+      var promises = []
+      promises.add(Executor.async {
+        Process.spawn(["wren", "do/serve.wren"], null, [null, 1, 2])
+      })
+      promises.add(Executor.async {
+        Process.spawn(["notify", "-c", "wren do/build.wren", "site"], null, [null, 1, 2])
+      })
+      Executor.await(promises)
+    } else {
+      build.call()
+    }
 }
-
-main.call()
+main.call(Process.arguments)
